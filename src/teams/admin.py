@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import CRMUser
+from .models import CRMUser, Team
 
 
 class UserAdminConfig(UserAdmin):
@@ -30,3 +30,4 @@ class UserAdminConfig(UserAdmin):
 
 
 admin.site.register(CRMUser, UserAdminConfig)
+admin.site.register(Team)
