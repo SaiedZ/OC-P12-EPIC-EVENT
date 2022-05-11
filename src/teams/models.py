@@ -17,6 +17,8 @@ class CRMUser(AbstractBaseUser, PermissionsMixin):
                               blank=True, null=True)
     is_staff = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
+    team = models.ForeignKey(
+        "Team", related_name="team", on_delete=models.SET_NULL, null=True)
 
     objects = CustomAccountManager()
 
