@@ -32,3 +32,4 @@ smmap==5.0.0
 sqlparse==0.4.2
 stevedore==3.5.0
 tomli==2.0.1
+Werkzeug==2.1.2
