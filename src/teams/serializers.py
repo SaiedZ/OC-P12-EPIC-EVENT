@@ -19,7 +19,7 @@ class CRMUserSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         """Initialize and if the view action is `list` or `retrieve`
         the team field will be set to `SerializerMethodField`.
-        
+
         This will give the `name` of the team in addition to the id. 
         """
         super().__init__(*args, **kwargs)

@@ -1,20 +1,10 @@
-from rest_framework import generics, permissions
+from rest_framework import permissions
 from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
 
 from . import models
-from .serializers import CRMUserSerializer
-
-
-class CreateUserViewSet(generics.CreateAPIView):
-    """
-    Handels the creatinon of new CRM users
-
-    This view is only accessible for ?????????????????????????????????????
-    """
-
-    serializer_class = CRMUserSerializer
-    queryset = models.CRMUser.objects.all()
-    permission_classes = [~permissions.IsAuthenticated]
+from .serializers import CRMUserSerializer, TeamSerializer
 
 
 class CRMUserViewSet(viewsets.ModelViewSet):
@@ -34,3 +24,23 @@ class CRMUserViewSet(viewsets.ModelViewSet):
         context = super().get_serializer_context()
         context["view_action"] = self.action
         return context
+
+
+class TeamViewSet(viewsets.ModelViewSet):
+
+    serializer_class = TeamSerializer
+    queryset = models.Team.objects.all()
+
+    def partial_update(self, request, pk=None):
+        return self._get_response_object("Partial update")
+
+    def update(self, request, pk=None):
+        return self._get_response_object("Update")
+
+    def retrieve(self, request, pk=None):
+        return self._get_response_object("Retrieve")
+
+    def _get_response_object(self, method_name):
+        response = {
+            'message': f'{method_name} function is not offered in this path.'}
+        return Response(response, status=status.HTTP_403_FORBIDDEN)
