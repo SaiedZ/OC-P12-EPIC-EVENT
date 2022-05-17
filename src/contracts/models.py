@@ -9,7 +9,7 @@ class Contract(models.Model):
     sales_contact = models.ForeignKey(
         to=CRMUser,
         related_name='sales_contact',
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
     )
     client = models.ForeignKey(
         to=Client,

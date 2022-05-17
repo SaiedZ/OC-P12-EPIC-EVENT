@@ -11,17 +11,17 @@ class Event(models.Model):
 
     contract = models.OneToOneField(
         to=Contract,
-        ondelete=models.CASCADE,
+        on_delete=models.CASCADE,
         related_name="contract",
     )
     support_contact = models.ForeignKey(
         to=CRMUser,
-        ondelete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name="support_contact",
     )
     status = models.ForeignKey(
         to='EventStatus',
-        ondelete=models.PROTECT,
+        on_delete=models.PROTECT,
         related_name="event_statut",
     )
     date_created = models.DateTimeField(auto_now_add=True)
