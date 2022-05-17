@@ -10,20 +10,21 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('name',)
+        fields = ('id', 'name')
 
 
 class CRMUserSerializer(serializers.ModelSerializer):
     """Serializer for CRM users."""
 
-    class Meta:
-        model = CRMUser
-        fields = ('email', 'username', 'first_name',
-                  'last_name', 'phone', 'mobile')
-
-
-class CreateCRMUserSerializer(serializers.ModelSerializer):
-    """Serializer to create CRM users."""
+    def __init__(self, *args, **kwargs):
+        """Initialize and if the view action is `list` or `retrieve`
+        the team field will be set to `SerializerMethodField`.
+        
+        This will give the `name` of the team in addition to the id. 
+        """
+        super().__init__(*args, **kwargs)
+        if self.context['view_action'] in ['retrieve', 'list']:
+            self.fields['team'] = serializers.SerializerMethodField()
 
     password = PasswordField()
 
@@ -33,8 +34,15 @@ class CreateCRMUserSerializer(serializers.ModelSerializer):
                   'password', 'last_name', 'phone', 'mobile',
                   'is_staff', 'is_active', 'is_superuser', 'team']
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
+            'is_superuser': {'read_only': True},
         }
+
+    def get_team(self, instance):
+        if instance.team:
+            queryset = instance.team
+            serializer = TeamSerializer(queryset)
+            return serializer.data
 
     def validate_password(self, password):
         if validate_password(password) is None:
@@ -43,7 +51,6 @@ class CreateCRMUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """ Create and return new user"""
-
         user = super().create(validated_data)
         user.set_password(validated_data['password'])
         user.save()
