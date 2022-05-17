@@ -1,15 +1,16 @@
-from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
 
 from . import models
+from . import permissions as team_permissions
 from .serializers import CRMUserSerializer, TeamSerializer
 
 
 class CRMUserViewSet(viewsets.ModelViewSet):
 
     serializer_class = CRMUserSerializer
+    permission_classes = [team_permissions.IsSuperUser]
 
     def get_queryset(self):
         """
@@ -30,6 +31,7 @@ class TeamViewSet(viewsets.ModelViewSet):
 
     serializer_class = TeamSerializer
     queryset = models.Team.objects.all()
+    permission_classes = [team_permissions.IsSuperUser]
 
     def partial_update(self, request, pk=None):
         return self._get_response_object("Partial update")
