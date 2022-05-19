@@ -17,7 +17,7 @@ class ContractViewSet(viewsets.ModelViewSet):
         """
         return models.Contract.objects.all()
 
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['get'])
     def sign_contract(self, request, pk=None):
         contract = self.get_object()
         if not contract.status:
