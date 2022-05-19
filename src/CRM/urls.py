@@ -21,4 +21,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('teams.urls')),
     path('api/', include('clients.urls')),
+    path('api/', include('contracts.urls')),
 ]
