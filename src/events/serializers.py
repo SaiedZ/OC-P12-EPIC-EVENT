@@ -11,7 +11,7 @@ class EventSerializer(serializers.ModelSerializer):
                   'event_date', 'notes', 'date_created', 'date_updated']
 
 
-class EventStatus(serializers.ModelSerializer):
+class EventStatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventStatus
