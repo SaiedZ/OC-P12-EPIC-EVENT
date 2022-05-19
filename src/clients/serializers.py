@@ -8,9 +8,9 @@ class ClientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Client
-        fields = ("compagny_name", "first_name", "last_name",
-                  "email", "phone", "mobile", "potential",
-                  "date_created", "date_updated")
+        fields = ("id", "compagny_name", "first_name",
+                  "last_name", "email", "phone", "mobile",
+                  "potential", "date_created", "date_updated")
         extra_kwargs = {
             'potential': {'read_only': True},
         }
