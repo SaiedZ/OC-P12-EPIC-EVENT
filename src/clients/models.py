@@ -19,6 +19,7 @@ class Client(models.Model):
                               validators=[phone_regex], blank=True, null=True)
     compagny_name = models.CharField(_("compagny name"), max_length=250,
                                      unique=True)
+    potential = models.BooleanField(_("potential client"), default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
