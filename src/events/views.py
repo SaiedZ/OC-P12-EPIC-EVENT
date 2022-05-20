@@ -12,6 +12,9 @@ class EventViewSet(viewsets.ModelViewSet):
         """
         Get the list of items for this view.
         """
+        if 'status' in self.request.query_params:
+            return models.Event.objects.filter(
+                status__name=self.request.query_params['status'])
         return models.Event.objects.all()
 
     def get_serializer_context(self):
