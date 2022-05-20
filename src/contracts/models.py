@@ -1,7 +1,7 @@
 from django.db import models
 from teams.models import CRMUser
-from clients.models import Client
 
+from clients import models as clients_models
 
 class Contract(models.Model):
     """Contract model."""
@@ -12,7 +12,7 @@ class Contract(models.Model):
         on_delete=models.PROTECT,
     )
     client = models.ForeignKey(
-        to=Client,
+        to=clients_models.Client,
         related_name='client',
         on_delete=models.CASCADE,
     )
