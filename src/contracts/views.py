@@ -17,6 +17,12 @@ class ContractViewSet(viewsets.ModelViewSet):
         """
         Get the list of items for this view.
         """
+        if 'status' in self.request.query_params:
+            if self.request.query_params['status'] == "true":
+                return contracts_models.Contract.objects.filter(status=True)
+            if self.request.query_params['status'] == "false":
+                return contracts_models.Contract.objects.filter(status=False)
+            return
         return contracts_models.Contract.objects.all()
 
     @action(detail=True, methods=['get'])
