@@ -15,4 +15,9 @@ class ClientViewSet(viewsets.ModelViewSet):
         """
         Get the list of items for this view.
         """
+        if 'potential' in self.request.query_params:
+            if self.request.query_params['potential'] == "true":
+                return models.Client.objects.filter(potential=True)
+            elif self.request.query_params['potential'] == "false":
+                return models.Client.objects.filter(potential=False)
         return models.Client.objects.all()
