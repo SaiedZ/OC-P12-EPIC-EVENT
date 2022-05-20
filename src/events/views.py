@@ -14,6 +14,14 @@ class EventViewSet(viewsets.ModelViewSet):
         """
         return models.Event.objects.all()
 
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        context = super().get_serializer_context()
+        context["view_action"] = self.action
+        return context
+
 
 class EventStatusViewSet(viewsets.ModelViewSet):
 
