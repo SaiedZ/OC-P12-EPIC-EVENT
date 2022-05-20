@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-from contracts import models as contracts_models
+from contracts.models import Contract
 
 
 class Client(models.Model):
@@ -32,7 +32,7 @@ class Client(models.Model):
         return f"{self.compagny_name.capitalize()}"
 
 
-@receiver(post_save, sender=contracts_models.Contract)
+@receiver(post_save, sender=Contract)
 def update_client_from_potential_to_existant(sender, instance, *args, **kwargs):
     if kwargs['update_fields'] is not None and 'status' in kwargs['update_fields']:
         instance.client.potential = False
