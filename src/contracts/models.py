@@ -22,3 +22,9 @@ class Contract(models.Model):
     status = models.BooleanField(default=False)
     amount = models.FloatField()
     payment_due = models.DateTimeField()
+
+    def __str__(self):
+        return (
+            f"{self.client} - "
+            f"{self.sales_contact}"
+        )
