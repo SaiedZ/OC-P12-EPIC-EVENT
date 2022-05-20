@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
 
 from events import models
 from events.serializers import EventSerializer, EventStatusSerializer
@@ -35,3 +37,17 @@ class EventStatusViewSet(viewsets.ModelViewSet):
         Get the list of items for this view.
         """
         return models.EventStatus.objects.all()
+
+    def partial_update(self, request, pk=None):
+        return self._get_response_object("Partial update")
+
+    def update(self, request, pk=None):
+        return self._get_response_object("Update")
+
+    def retrieve(self, request, pk=None):
+        return self._get_response_object("Retrieve")
+
+    def _get_response_object(self, method_name):
+        response = {
+            'message': f'{method_name} function is not offered in this path.'}
+        return Response(response, status=status.HTTP_403_FORBIDDEN)
