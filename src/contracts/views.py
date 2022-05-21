@@ -7,11 +7,13 @@ from django.db.models.signals import post_save
 
 from contracts.serializers import ContractSerializer
 from contracts import models as contracts_models
+from contracts.permissions import ContractPermissionSafeAndPost
 
 
 class ContractViewSet(viewsets.ModelViewSet):
 
     serializer_class = ContractSerializer
+    permission_classes = [ContractPermissionSafeAndPost]
 
     def get_queryset(self):
         """
@@ -35,6 +37,14 @@ class ContractViewSet(viewsets.ModelViewSet):
             return Response(content, status=status.HTTP_201_CREATED)
         content = {"message": "Contract already signed."}
         return Response(content, status=status.HTTP_409_CONFLICT)
+
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        context = super().get_serializer_context()
+        context["view_action"] = self.action
+        return context
 
 
 @receiver(post_save, sender=contracts_models.Contract)
