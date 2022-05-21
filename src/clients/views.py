@@ -3,12 +3,14 @@ from rest_framework import filters
 
 from clients import models
 from clients.serializers import ClientSerializer
+from clients.permissions import IsManager, HasClientPermissions
 
 
 class ClientViewSet(viewsets.ModelViewSet):
 
     serializer_class = ClientSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    permission_classes = [IsManager | HasClientPermissions]
     search_fields = ['potential']
 
     def get_queryset(self):
