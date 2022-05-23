@@ -1,4 +1,4 @@
-from multiprocessing import context
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from events.models import EventStatus, Event
@@ -43,6 +43,18 @@ class EventSerializer(serializers.ModelSerializer):
         response['date_updated'] = instance.date_updated.strftime(
             "%H:%M:%S %d-%m-%Y")
         return response
+
+    def validate(self, data):
+        support_contact = data.get("sales_contact")
+        if support_contact.team is None:
+            raise serializers.ValidationError(
+                _("Sales contact must be par of the `Support` team.")
+            )
+        elif support_contact.team.name != "Support":
+            raise serializers.ValidationError(
+                _("Sales contact must be par of the `Support` team.")
+            )
+        return data
 
 
 class EventStatusSerializer(serializers.ModelSerializer):
