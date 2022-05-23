@@ -17,21 +17,24 @@ class ContractViewSet(viewsets.ModelViewSet):
         """
         Get the list of items for this view.
         """
-        if 'status' in self.request.query_params:
-            if self.request.query_params['status'].capitalize() == "True":
+        if "status" in self.request.query_params:
+            if self.request.query_params["status"].capitalize() == "True":
                 return contracts_models.Contract.objects.filter(status=True)
-            if self.request.query_params['status'].capitalize() == "False":
+
+            if self.request.query_params["status"].capitalize() == "False":
                 return contracts_models.Contract.objects.filter(status=False)
+
             return contracts_models.Contract.objects.none()
+
         return contracts_models.Contract.objects.all()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def sign_contract(self, request, pk=None):
         contract = self.get_object()
         if not contract.status:
             contract.status = True
-            contract.save(update_fields=['status'])
-            content = {'message': 'Contract signed.'}
+            contract.save(update_fields=["status"])
+            content = {"message": "Contract signed."}
             return Response(content, status=status.HTTP_201_CREATED)
         content = {"message": "Contract already signed."}
         return Response(content, status=status.HTTP_409_CONFLICT)

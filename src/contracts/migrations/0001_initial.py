@@ -11,21 +11,43 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('clients', '0001_initial'),
+        ("clients", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Contract',
+            name="Contract",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_created', models.DateTimeField(auto_now_add=True)),
-                ('date_updated', models.DateTimeField(auto_now=True)),
-                ('status', models.BooleanField(default=False)),
-                ('amount', models.FloatField()),
-                ('payment_due', models.DateTimeField()),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='client', to='clients.client')),
-                ('sales_contact', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='sales_contact', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_created", models.DateTimeField(auto_now_add=True)),
+                ("date_updated", models.DateTimeField(auto_now=True)),
+                ("status", models.BooleanField(default=False)),
+                ("amount", models.FloatField()),
+                ("payment_due", models.DateTimeField()),
+                (
+                    "client",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="client",
+                        to="clients.client",
+                    ),
+                ),
+                (
+                    "sales_contact",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="sales_contact",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

@@ -9,12 +9,12 @@ class Contract(models.Model):
 
     sales_contact = models.ForeignKey(
         to=CRMUser,
-        related_name='sales_contact',
+        related_name="sales_contact",
         on_delete=models.PROTECT,
     )
     client = models.ForeignKey(
         to=Client,
-        related_name='client',
+        related_name="client",
         on_delete=models.CASCADE,
     )
     date_created = models.DateTimeField(auto_now_add=True)
@@ -24,7 +24,4 @@ class Contract(models.Model):
     payment_due = models.DateTimeField()
 
     def __str__(self):
-        return (
-            f"{self.client} - "
-            f"{self.sales_contact}"
-        )
+        return f"{self.client} - " f"{self.sales_contact}"
