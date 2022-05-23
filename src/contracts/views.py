@@ -5,13 +5,17 @@ from rest_framework.response import Response
 
 from contracts.serializers import ContractSerializer
 from contracts import models as contracts_models
-from contracts.permissions import ContractPermissionSafeAndPost
+from contracts.permissions import (
+    ContractPermissionSafeAndPost,
+    SignedContractTReadOnly
+)
 
 
 class ContractViewSet(viewsets.ModelViewSet):
 
     serializer_class = ContractSerializer
-    permission_classes = [ContractPermissionSafeAndPost]
+    permission_classes = [
+        ContractPermissionSafeAndPost & SignedContractTReadOnly]
 
     def get_queryset(self):
         """

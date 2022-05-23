@@ -11,3 +11,11 @@ class ContractPermissionSafeAndPost(BasePermission):
         if view.action == "retrieve":
             return True
         return request.user == obj.sales_contact
+
+
+class SignedContractTReadOnly(BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if view.action not in ["retrieve", "destroy"]:
+            return not obj.status
+        return True
