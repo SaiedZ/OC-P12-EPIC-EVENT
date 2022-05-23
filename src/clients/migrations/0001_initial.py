@@ -14,13 +14,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Client',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=25, verbose_name='first name')),
-                ('last_name', models.CharField(max_length=25, verbose_name='last name')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('first_name', models.CharField(
+                    max_length=25, verbose_name='first name')),
+                ('last_name', models.CharField(
+                    max_length=25, verbose_name='last name')),
                 ('email', models.EmailField(max_length=100, unique=True)),
-                ('phone', models.CharField(blank=True, max_length=20, null=True, verbose_name='phone number')),
-                ('mobile', models.CharField(blank=True, max_length=20, null=True, verbose_name='mobile number')),
-                ('compagny_name', models.CharField(max_length=250, unique=True, verbose_name='compagny name')),
+                ('phone', models.CharField(blank=True, max_length=20,
+                 null=True, verbose_name='phone number')),
+                ('mobile', models.CharField(blank=True, max_length=20,
+                 null=True, verbose_name='mobile number')),
+                ('compagny_name', models.CharField(max_length=250,
+                 unique=True, verbose_name='compagny name')),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
                 ('date_updated', models.DateTimeField(auto_now=True)),
             ],

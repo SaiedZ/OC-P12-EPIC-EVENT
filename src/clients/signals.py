@@ -8,6 +8,6 @@ from contracts import models as contracts_models
 def update_client_from_potential_to_existant(sender, instance,
                                              *args, **kwargs):
     if kwargs['update_fields'] is not None \
-     and 'status' in kwargs['update_fields']:
+            and 'status' in kwargs['update_fields']:
         instance.client.potential = False
         instance.client.save(update_fields=['potential'])
