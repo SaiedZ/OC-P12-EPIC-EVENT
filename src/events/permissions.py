@@ -20,6 +20,14 @@ class HasEventPermission(BasePermission):
         return request.user.id == obj.support_contact.id
 
 
+class ClosedEventsToReadOnly(BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        if view.action not in ["retrieve", "destroy"]:
+            return obj.status.name == "ongoing"
+        return True
+
+
 class HasEventStatusPermission(BasePermission):
 
     def has_permission(self, request, view):

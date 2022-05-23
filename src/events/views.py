@@ -5,13 +5,16 @@ from rest_framework.response import Response
 
 from events import models
 from events.serializers import EventSerializer, EventStatusSerializer
-from events.permissions import HasEventStatusPermission, HasEventPermission
+from events.permissions import (
+    HasEventStatusPermission,
+    HasEventPermission, ClosedEventsToReadOnly
+)
 
 
 class EventViewSet(viewsets.ModelViewSet):
 
     serializer_class = EventSerializer
-    permission_classes = [HasEventPermission]
+    permission_classes = [HasEventPermission & ClosedEventsToReadOnly]
 
     def get_queryset(self):
         """
