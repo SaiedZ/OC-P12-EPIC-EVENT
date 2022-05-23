@@ -23,6 +23,15 @@ class Client(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=~models.Q(phone__exact="")
+                | ~models.Q(mobile__exact=""),
+                name="must_have_phone_number",
+            ),
+        ]
+
     def __str__(self):
         """string representation of a client representing the compagny_name."""
         return f"{self.compagny_name.capitalize()}"
