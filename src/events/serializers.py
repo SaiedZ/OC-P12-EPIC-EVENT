@@ -44,8 +44,15 @@ class EventSerializer(serializers.ModelSerializer):
             "%H:%M:%S %d-%m-%Y")
         return response
 
-    def validate(self, data):
-        support_contact = data.get("sales_contact")
+    def validate_contract(self, contract):
+        if not contract.status:
+            raise serializers.ValidationError(
+                _("Contract must be signed before creating the event.")
+            )
+        return contract
+
+    def validate_support_contact(self, support_contact):
+        # sourcery skip: merge-duplicate-blocks, remove-redundant-if
         if support_contact.team is None:
             raise serializers.ValidationError(
                 _("Sales contact must be par of the `Support` team.")
@@ -54,7 +61,7 @@ class EventSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 _("Sales contact must be par of the `Support` team.")
             )
-        return data
+        return support_contact
 
 
 class EventStatusSerializer(serializers.ModelSerializer):
