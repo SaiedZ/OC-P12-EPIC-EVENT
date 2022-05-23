@@ -4,7 +4,7 @@ from rest_framework.permissions import BasePermission
 class HasEventPermission(BasePermission):
 
     def has_permission(self, request, view):
-        if request.user.is_authenticated:
+        if request.user.is_authenticated and request.user.team is not None:
             if view.action == 'create':
                 return request.user.team.name == "Sale"
             return request.user.team.name in [
