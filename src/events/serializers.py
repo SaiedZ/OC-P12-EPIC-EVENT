@@ -16,7 +16,7 @@ class EventSerializer(serializers.ModelSerializer):
         """
         super().__init__(*args, **kwargs)
         if self.context['view_action'] == 'retrieve':
-            self.fields['contract'] = ContractSerializer()
+            self.fields['contract'] = ContractSerializer(context=self.context)
             self.fields['support_contact'] = CRMUserSerializer(
                 context=self.context)
         if self.context['view_action'] == 'list':
