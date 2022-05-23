@@ -17,7 +17,7 @@ class ClientSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, data):
-
+        """A client must have at least one phone number."""
         phone = data.get('phone')
         mobile = data.get('mobile')
 

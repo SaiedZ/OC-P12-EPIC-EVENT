@@ -46,9 +46,8 @@ class ContractSerializer(serializers.ModelSerializer):
             "%H:%M:%S %d-%m-%Y")
         return response
 
-    def validate(self, data):
-
-        sales_contact = data.get("sales_contact")
+    def validate_sales_contact(self, sales_contact):
+        """sales_contact must be part of the Sale Team."""
         if sales_contact.team is None:
             raise serializers.ValidationError(
                 _("Sales contact must be par of the `Sale` team.")
@@ -57,4 +56,4 @@ class ContractSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 _("Sales contact must be par of the `Sale` team.")
             )
-        return data
+        return sales_contact

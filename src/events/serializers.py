@@ -45,6 +45,7 @@ class EventSerializer(serializers.ModelSerializer):
         return response
 
     def validate_contract(self, contract):
+        """Contract must be signed."""
         if not contract.status:
             raise serializers.ValidationError(
                 _("Contract must be signed before creating the event.")
@@ -52,6 +53,7 @@ class EventSerializer(serializers.ModelSerializer):
         return contract
 
     def validate_support_contact(self, support_contact):
+        """support_contact must be part of the Support Team."""
         # sourcery skip: merge-duplicate-blocks, remove-redundant-if
         if support_contact.team is None:
             raise serializers.ValidationError(
@@ -65,7 +67,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class EventStatusSerializer(serializers.ModelSerializer):
-
+    """A Sseralizer for EventsStatus"""
     class Meta:
         model = EventStatus
         fields = ['id', 'name']
