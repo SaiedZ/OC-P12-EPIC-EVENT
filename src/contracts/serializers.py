@@ -16,7 +16,8 @@ class ContractSerializer(serializers.ModelSerializer):
         super().__init__(*args, **kwargs)
         if self.context["view_action"] == "retrieve":
             self.fields["client"] = ClientSerializer()
-            self.fields["sales_contact"] = CRMUserSerializer(context=self.context)
+            self.fields["sales_contact"] = CRMUserSerializer(
+                context=self.context)
         if self.context["view_action"] == "list":
             self.fields["client"] = serializers.StringRelatedField()
             self.fields["sales_contact"] = serializers.StringRelatedField()
@@ -39,8 +40,10 @@ class ContractSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response["date_created"] = instance.date_created.strftime("%H:%M:%S %d-%m-%Y")
-        response["date_updated"] = instance.date_updated.strftime("%H:%M:%S %d-%m-%Y")
+        response["date_created"] = instance.date_created.strftime(
+            "%H:%M:%S %d-%m-%Y")
+        response["date_updated"] = instance.date_updated.strftime(
+            "%H:%M:%S %d-%m-%Y")
         return response
 
     def validate(self, data):

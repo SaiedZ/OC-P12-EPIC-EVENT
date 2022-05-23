@@ -26,4 +26,4 @@ class TeamAccountTests(TestCase):
                 email="test_super_user@super.com", username="username",
                 first_name="first_name", last_name="last_name",
                 password="password", is_superuser=False
-                )
+            )

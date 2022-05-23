@@ -14,11 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='crmuser',
             name='mobile',
-            field=models.CharField(blank=True, max_length=20, null=True, validators=[django.core.validators.RegexValidator(message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')], verbose_name='mobile number'),
+            field=models.CharField(blank=True, max_length=20, null=True, validators=[django.core.validators.RegexValidator(
+                message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')], verbose_name='mobile number'),
         ),
         migrations.AlterField(
             model_name='crmuser',
             name='phone',
-            field=models.CharField(blank=True, max_length=20, null=True, validators=[django.core.validators.RegexValidator(message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')], verbose_name='phone number'),
+            field=models.CharField(blank=True, max_length=20, null=True, validators=[django.core.validators.RegexValidator(
+                message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')], verbose_name='phone number'),
         ),
     ]

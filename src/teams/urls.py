@@ -8,5 +8,5 @@ router.register(r'users', views.CRMUserViewSet, basename='user')
 router.register(r'teams', views.TeamViewSet, basename='team')
 
 urlpatterns = [
-   path('', include(router.urls)),
+    path('', include(router.urls)),
 ]

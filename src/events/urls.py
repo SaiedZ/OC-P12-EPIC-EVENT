@@ -9,5 +9,5 @@ router.register(r'event-status', views.EventStatusViewSet,
                 basename='event-status')
 
 urlpatterns = [
-   path('', include(router.urls)),
+    path('', include(router.urls)),
 ]

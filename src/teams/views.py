@@ -12,7 +12,7 @@ class CRMUserViewSet(viewsets.ModelViewSet):
     serializer_class = CRMUserSerializer
     permission_classes = [
         team_permissions.IsAuthenticatedAndSuperUserOrFromManagement
-        ]
+    ]
 
     def get_queryset(self):
         """
