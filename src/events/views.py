@@ -7,11 +7,13 @@ from events import models
 from events.serializers import EventSerializer, EventStatusSerializer
 from events.permissions import (
     HasEventStatusPermission,
-    HasEventPermission, ClosedEventsToReadOnly
+    HasEventPermission,
+    ClosedEventsToReadOnly
 )
 
 
 class EventViewSet(viewsets.ModelViewSet):
+    """ModelViewSet for Event."""
 
     serializer_class = EventSerializer
     permission_classes = [HasEventPermission & ClosedEventsToReadOnly]
@@ -19,6 +21,9 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """
         Get the list of items for this view.
+
+        Additionnal filter was added make distinction between ongoing
+        and finished events.
         """
         if 'status' in self.request.query_params:
             return models.Event.objects.filter(
@@ -43,7 +48,13 @@ class EventViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def close_event(self, request, pk=None):
+        """
+        Custum method to close and event.
+
+        Raise error if the event is already closed.
+        """
         event = self.get_object()
+
         if event.status.name == "ongoing":
             status_finished = models.EventStatus.objects.filter(
                 name="finished")[0]
@@ -51,6 +62,7 @@ class EventViewSet(viewsets.ModelViewSet):
             event.save(update_fields=['status'])
             content = {'message': 'Event have been closed successfully.'}
             return Response(content, status=status.HTTP_201_CREATED)
+
         content = {"message": "Event is already closed."}
         return Response(content, status=status.HTTP_409_CONFLICT)
 
@@ -59,13 +71,9 @@ class EventStatusViewSet(viewsets.ModelViewSet):
 
     serializer_class = EventStatusSerializer
     permission_classes = [HasEventStatusPermission]
+    queryset = models.EventStatus.objects.all()
 
-    def get_queryset(self):
-        """
-        Get the list of items for this view.
-        """
-        return models.EventStatus.objects.all()
-
+    # Raising error message for unallwoed methods
     def partial_update(self, request, pk=None):
         return self._get_response_object("Partial update")
 

@@ -12,28 +12,34 @@ from contracts.permissions import (
 
 
 class ContractViewSet(viewsets.ModelViewSet):
+    """ModelViewSet for contract."""
 
     serializer_class = ContractSerializer
     permission_classes = [
-        ContractPermissionSafeAndPost & SignedContractTReadOnly]
+        ContractPermissionSafeAndPost & SignedContractTReadOnly
+    ]
 
     def get_queryset(self):
         """
         Get the list of items for this view.
+
+        A filter was added here for signed contracts.
         """
         if "status" in self.request.query_params:
             if self.request.query_params["status"].capitalize() == "True":
                 return contracts_models.Contract.objects.filter(status=True)
-
             if self.request.query_params["status"].capitalize() == "False":
                 return contracts_models.Contract.objects.filter(status=False)
-
             return contracts_models.Contract.objects.none()
 
         return contracts_models.Contract.objects.all()
 
     @action(detail=True, methods=["get"])
     def sign_contract(self, request, pk=None):
+        """
+        Custum action to sign contract.
+        Raise error if contract is already signed.
+        """
         contract = self.get_object()
         if not contract.status:
             contract.status = True

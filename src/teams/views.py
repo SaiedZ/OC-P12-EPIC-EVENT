@@ -8,6 +8,7 @@ from .serializers import CRMUserSerializer, TeamSerializer
 
 
 class CRMUserViewSet(viewsets.ModelViewSet):
+    """ModelViewSet for CRMUser."""
 
     serializer_class = CRMUserSerializer
     permission_classes = [
@@ -30,12 +31,14 @@ class CRMUserViewSet(viewsets.ModelViewSet):
 
 
 class TeamViewSet(viewsets.ModelViewSet):
+    """ModelViewSet for Team."""
 
     serializer_class = TeamSerializer
     queryset = models.Team.objects.all()
     permission_classes = [
         team_permissions.IsAuthenticatedAndSuperUserOrManagerForSafeMethods]
 
+    # Raising error message for unallwoed methods
     def partial_update(self, request, pk=None):
         return self._get_response_object("Partial update")
 
