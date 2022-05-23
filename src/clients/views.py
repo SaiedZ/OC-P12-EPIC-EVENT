@@ -11,15 +11,16 @@ class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     permission_classes = [IsManager | HasClientPermissions]
-    search_fields = ['potential']
+    # search_fields = ['potential']
 
     def get_queryset(self):
         """
         Get the list of items for this view.
         """
         if 'potential' in self.request.query_params:
-            if self.request.query_params['potential'] == "true":
+            if self.request.query_params['potential'].capitalize() == "True":
                 return models.Client.objects.filter(potential=True)
-            elif self.request.query_params['potential'] == "false":
+            if self.request.query_params['potential'].capitalize() == "False":
                 return models.Client.objects.filter(potential=False)
+            return models.Client.objects.none()
         return models.Client.objects.all()
