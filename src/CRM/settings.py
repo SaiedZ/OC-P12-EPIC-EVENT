@@ -47,6 +47,7 @@ PROJECT_APPS = [
     'clients',
     'contracts',
     'events',
+    'authentication',
 ]
 
 THIRD_PARTY_APPS = [
