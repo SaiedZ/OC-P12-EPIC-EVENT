@@ -60,20 +60,20 @@ class EventSerializer(serializers.ModelSerializer):
         # sourcery skip: merge-duplicate-blocks, remove-redundant-if
         if support_contact.team is None:
             raise serializers.ValidationError(
-                _("Sales contact must be par of the `Support` team.")
+                _("Support contact must be par of the `Support` team.")
             )
         elif support_contact.team.name != "Support":
             raise serializers.ValidationError(
-                _("Sales contact must be par of the `Support` team.")
+                _("Support contact must be par of the `Support` team.")
             )
         return support_contact
 
     def create(self, validated_data):
         """Setting the status to ongoing when creating an event."""
-        instance = super().create(validated_data)
         ongoing_status = EventStatus.objects.filter(name="ongoing")[0]
-        instance.status = ongoing_status
-        return instance
+        validated_data['status'] = ongoing_status
+        return super().create(validated_data)
+
 
 class EventStatusSerializer(serializers.ModelSerializer):
     """A Sseralizer for EventsStatus"""
