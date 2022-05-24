@@ -5,7 +5,6 @@ from rest_framework_simplejwt.tokens import (RefreshToken,
                                              OutstandingToken,
                                              BlacklistedToken)
 from rest_framework.response import Response
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class LogoutView(APIView):

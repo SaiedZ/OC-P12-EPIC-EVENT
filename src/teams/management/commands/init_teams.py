@@ -14,7 +14,9 @@ TEAMS = [
 
 class Command(BaseCommand):
 
-    help = 'Initialize the team objects by creating: Management and Sale and Support teams'
+    help = ('Initialize the team objects by creating: '
+            'Management and Sale and Support teams'
+            )
 
     def handle(self, *args, **options):
         self.stdout.write(self.style.MIGRATE_HEADING(self.help))
