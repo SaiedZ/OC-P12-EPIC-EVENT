@@ -31,6 +31,9 @@ class EventSerializer(serializers.ModelSerializer):
         fields = ['id', 'contract', 'support_contact', 'client_name',
                   'status', 'attendees', 'event_date', 'notes',
                   'date_created', 'date_updated']
+        extra_kwargs = {
+            "status": {"read_only": True},
+        }
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
@@ -65,6 +68,12 @@ class EventSerializer(serializers.ModelSerializer):
             )
         return support_contact
 
+    def create(self, validated_data):
+        """Setting the status to ongoing when creating an event."""
+        instance = super().create(validated_data)
+        ongoing_status = EventStatus.objects.filter(name="ongoing")[0]
+        instance.status = ongoing_status
+        return instance
 
 class EventStatusSerializer(serializers.ModelSerializer):
     """A Sseralizer for EventsStatus"""

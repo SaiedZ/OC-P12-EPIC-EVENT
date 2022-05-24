@@ -36,6 +36,8 @@ class CRMUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True},
             'is_superuser': {'read_only': True},
+            'is_staff': {'read_only': True},
+            'is_active': {'read_only': True},
         }
 
     def get_team(self, instance):
