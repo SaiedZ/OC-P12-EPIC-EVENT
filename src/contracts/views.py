@@ -18,6 +18,15 @@ class ContractViewSet(viewsets.ModelViewSet):
     permission_classes = [
         ContractPermissionSafeAndPost & SignedContractTReadOnly
     ]
+    filter_fields = [
+        'sales_contact',
+        'client',
+        'date_created',
+        'date_updated',
+        'status',
+        'amount',
+        'payment_due',
+    ]
 
     def get_queryset(self):
         """

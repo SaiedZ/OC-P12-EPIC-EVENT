@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from rest_framework import filters
 
 from clients import models
 from clients.serializers import ClientSerializer
@@ -10,15 +9,16 @@ class ClientViewSet(viewsets.ModelViewSet):
     """ModelViewSet for Client model."""
 
     serializer_class = ClientSerializer
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     permission_classes = [IsManager | HasClientPermissions]
-    search_fields = [
+    filter_fields = [
+        'phone',
+        'mobile',
         'email',
-        'compagny_name',
         'first_name',
         'last_name',
-        'phone',
-        'mobile']
+        'compagny_name',
+        'potential',
+    ]
 
     def get_queryset(self):
         """

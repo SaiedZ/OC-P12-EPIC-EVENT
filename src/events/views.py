@@ -17,6 +17,16 @@ class EventViewSet(viewsets.ModelViewSet):
 
     serializer_class = EventSerializer
     permission_classes = [HasEventPermission & ClosedEventsToReadOnly]
+    filter_fields = [
+        'support_contact',
+        'contract',
+        'date_created',
+        'date_updated',
+        'status',
+        'attendees',
+        'event_date',
+        'notes',
+    ]
 
     def get_queryset(self):
         """
