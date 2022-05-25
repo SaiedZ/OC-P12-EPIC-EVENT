@@ -56,6 +56,7 @@ THIRD_PARTY_APPS = [
     'django_extensions',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'drf_spectacular',
 ]
 
 
@@ -163,7 +164,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_FILTER_BACKENDS": [
         "url_filter.integrations.drf.DjangoFilterBackend",
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -171,4 +173,11 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'EpicEvent CRM API',
+    'DESCRIPTION': 'RESTFull API for EpicEvent CRM',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
