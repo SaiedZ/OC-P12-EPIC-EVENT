@@ -167,6 +167,8 @@ REST_FRAMEWORK = {
         "url_filter.integrations.drf.DjangoFilterBackend",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    #   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    #   'PAGE_SIZE': 10,
 }
 
 SIMPLE_JWT = {
@@ -188,7 +190,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{asctime} {levelname} {module} {process:d} {thread:d} {message}',
+            'format': '{asctime} {levelname} {module} {message}',
             'style': '{',
         },
         'simple': {
@@ -217,7 +219,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
+        'custom_logger': {
             'handlers': ['file_debug', 'file_warning'],
             'level': 'DEBUG',
             'propagate': True,

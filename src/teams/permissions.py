@@ -1,4 +1,7 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
+import logging
+
+logger = logging.getLogger('custom_logger')
 
 
 class IsAuthenticatedAndSuperUserOrFromManagement(BasePermission):
@@ -13,9 +16,14 @@ class IsAuthenticatedAndSuperUserOrFromManagement(BasePermission):
     """
 
     def has_permission(self, request, view):
-        if request.user.is_authenticated and request.user.team is not None:
-            return request.user.is_superuser \
-                or request.user.team.name == "Management"
+        if request.user.is_authenticated:
+            if request.user.team is not None:
+                return request.user.team.name == "Management"
+            else:
+                return request.user.is_superuser
+
+        logger.warning(f"Unauthorized user ` {request.user} ` tried to access "
+                       f"{request.path}")
         return False
 
 
@@ -30,12 +38,19 @@ class IsAuthenticatedAndSuperUserOrManagerForSafeMethods(BasePermission):
         - Users from `Management` team have only the right to view informations
     """
     def has_permission(self, request, view):
-        if request.user.is_authenticated and request.user.team is not None:
-            return request.user.is_superuser \
-                or request.user.team.name == "Management" \
-                and request.method in SAFE_METHODS
-
+        if request.user.is_authenticated:
+            if request.user.team is not None:
+                return request.user.team.name == "Management" \
+                    and request.method in SAFE_METHODS
+            else:
+                return request.user.is_superuser
+        logger.warning(f"Unauthorized user ` {request.user} ` tried to access "
+                       f"{request.path}")
         return False
 
     def has_object_permission(self, request, view, obj):
-        return request.user.is_superuser
+        if request.user.is_superuser:
+            return True
+        logger.warning(f"Unauthorized user ` {request.user} ` tried to access "
+                       f"{request.path}")
+        return False
