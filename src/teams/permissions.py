@@ -1,5 +1,6 @@
-from rest_framework.permissions import BasePermission, SAFE_METHODS
 import logging
+
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 logger = logging.getLogger('custom_logger')
 

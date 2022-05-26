@@ -1,6 +1,6 @@
 /.env
 commands.txt
 /.vscode
-logs
-logs/debug.log
-logs/debug.log
+/logs
+*.log
+

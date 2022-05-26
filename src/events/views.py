@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework import status
@@ -10,6 +12,8 @@ from events.permissions import (
     HasEventPermission,
     ClosedEventsToReadOnly
 )
+
+logger = logging.getLogger('custom_logger')
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -75,6 +79,38 @@ class EventViewSet(viewsets.ModelViewSet):
 
         content = {"message": "Event is already closed."}
         return Response(content, status=status.HTTP_409_CONFLICT)
+
+    def check_permissions(self, request):
+        """
+        Check if the request should be permitted.
+        Raises an appropriate exception if the request is not permitted.
+        """
+        for permission in self.get_permissions():
+            if not permission.has_permission(request, self):
+                logger.warning(f"Unauthorized user ` {request.user} ` "
+                               f"tried to access {request.path} "
+                               f"using  {request.method=}")
+                self.permission_denied(
+                    request,
+                    message=getattr(permission, 'message', None),
+                    code=getattr(permission, 'code', None)
+                )
+
+    def check_object_permissions(self, request, obj):
+        """
+        Check if the request should be permitted for a given object.
+        Raises an appropriate exception if the request is not permitted.
+        """
+        for permission in self.get_permissions():
+            if not permission.has_object_permission(request, self, obj):
+                logger.warning(f"Unauthorized user ` {request.user} ` "
+                               f"tried to access {request.path} "
+                               f"using  {request.method=}")
+                self.permission_denied(
+                    request,
+                    message=getattr(permission, 'message', None),
+                    code=getattr(permission, 'code', None)
+                )
 
 
 class EventStatusViewSet(viewsets.ModelViewSet):
