@@ -1,8 +1,14 @@
+"""
+Serializers for the User and Team models.
+"""
+
 from rest_framework import serializers
-from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import PasswordField
 
-from .models import CRMUser, Team
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth import get_user_model
+
+from .models import Team
 
 
 class TeamSerializer(serializers.ModelSerializer):
@@ -10,7 +16,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('id', 'name')
+        fields = ("id", "name")
 
 
 class CRMUserSerializer(serializers.ModelSerializer):
@@ -23,21 +29,32 @@ class CRMUserSerializer(serializers.ModelSerializer):
         This will give the `name` of the team in addition to the id.
         """
         super().__init__(*args, **kwargs)
-        if self.context['view_action'] in ['retrieve', 'list']:
-            self.fields['team'] = serializers.SerializerMethodField()
+        if self.context["view_action"] in ["retrieve", "list"]:
+            self.fields["team"] = serializers.SerializerMethodField()
 
     password = PasswordField()
 
     class Meta:
-        model = CRMUser
-        fields = ['id', 'email', 'username', 'first_name',
-                  'password', 'last_name', 'phone', 'mobile',
-                  'is_staff', 'is_active', 'is_superuser', 'team']
+        model = get_user_model()
+        fields = [
+            "id",
+            "email",
+            "username",
+            "first_name",
+            "password",
+            "last_name",
+            "phone",
+            "mobile",
+            "is_staff",
+            "is_active",
+            "is_superuser",
+            "team",
+        ]
         extra_kwargs = {
-            'password': {'write_only': True},
-            'is_superuser': {'read_only': True},
-            'is_staff': {'read_only': True},
-            'is_active': {'read_only': True},
+            "password": {"write_only": True, "min_length": 7},
+            "is_superuser": {"read_only": True},
+            "is_staff": {"read_only": True},
+            "is_active": {"read_only": True},
         }
 
     def get_team(self, instance):
@@ -52,8 +69,5 @@ class CRMUserSerializer(serializers.ModelSerializer):
             return password
 
     def create(self, validated_data):
-        """ Create and return new user"""
-        user = super().create(validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
+        """Create and return new user with encrypted password."""
+        return get_user_model().objects.create_user(**validated_data)

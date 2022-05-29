@@ -1104,3 +1104,7 @@
 2022-05-26 17:57:00,245 DEBUG autoreload 32876 37964 File C:\Users\saied\OneDrive\Formation Python Openclassrooms\Projet 12\OC-P12-EPIC-EVENT\.env\Lib\site-packages\django\contrib\auth\migrations\0003_alter_user_email_max_length.py first seen with mtime 1652259936.6983588
 2022-05-26 17:57:00,247 DEBUG autoreload 32876 37964 File C:\Users\saied\OneDrive\Formation Python Openclassrooms\Projet 12\OC-P12-EPIC-EVENT\.env\Lib\site-packages\django\contrib\auth\migrations\__init__.py first seen with mtime 1652259936.7123568
 2022-05-26 17:57:00,248 DEBUG autoreload 32876 37964 File C:\Users\saied\OneDrive\Formation Python Openclassrooms\Projet 12\OC-P12-EPIC-EVENT\.env\Lib\site-packages\django\contrib\admin\migrations\0002_logentry_remove_auto_add.py first seen with mtime 1652259935.5213532
+2022-05-29 22:09:22,467 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
+2022-05-29 22:09:22,478 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
+2022-05-29 22:09:22,485 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
+2022-05-29 22:09:22,485 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
