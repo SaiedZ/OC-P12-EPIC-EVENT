@@ -31,13 +31,13 @@ class CRMUserModelTests(TestCase):
             )
 
     def test_email_is_needed_to_create_user(self):
-        user_model = get_user_model()
         with self.assertRaises(ValueError):
-            user_model.objects.create_user(
+            get_user_model().objects.create_user(
                 email=None,
                 username="no email",
-                first_name="first_name", last_name="last_name",
-                password="password", is_superuser=False
+                first_name="first_name",
+                last_name="last_name",
+                password="password"
             )
 
     def test_crmuser_str(self):
