@@ -1,12 +1,18 @@
+"""
+Managers for the custom User and Team models.
+"""
+
 from django.contrib.auth.models import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Manager
 
 
 class CustomAccountManager(BaseUserManager):
+    """Manager for users."""
 
     def create_superuser(self, email, username, first_name,
                          last_name, password, **other_fields):
+        """Create, save and return a new superuser."""
 
         other_fields.setdefault("is_superuser", True)
         other_fields.setdefault("is_staff", True)
@@ -20,6 +26,7 @@ class CustomAccountManager(BaseUserManager):
 
     def create_user(self, email, username, first_name,
                     last_name, password, **other_fields):
+        """Create, save and return a new user."""
 
         if not email:
             raise ValueError(_("You must provide an email address"))
@@ -35,8 +42,10 @@ class CustomAccountManager(BaseUserManager):
 
 
 class UniqueNameManager(Manager):
-    """Generic manager responsible of handling entities described with a unique
-    name."""
+    """
+    Generic manager responsible of handling entities described with a unique
+    name.
+    """
 
     def get_or_create_from_names(self, names):
         """Gets or creates objects from comma-separated names."""

@@ -1,10 +1,16 @@
+"""
+Django admin customization for CRMUSer and Team models.
+"""
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
 
-from .models import CRMUser, Team
+from .models import Team
 
 
 class UserAdminConfig(UserAdmin):
+    """Define the admin pages for users."""
 
     search_fields = ("first_name", "email", "username", "team")
     list_filter = ("email", "username", "team")
@@ -53,5 +59,5 @@ class UserAdminConfig(UserAdmin):
     )
 
 
-admin.site.register(CRMUser, UserAdminConfig)
+admin.site.register(get_user_model(), UserAdminConfig)
 admin.site.register(Team)

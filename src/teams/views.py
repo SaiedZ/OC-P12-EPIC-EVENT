@@ -1,3 +1,9 @@
+"""
+Views for the user API.
+"""
+
+from django.contrib.auth import get_user_model
+
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework.response import Response
@@ -26,7 +32,7 @@ class CRMUserViewSet(viewsets.ModelViewSet):
         """
         Get the list of items for this view.
         """
-        return models.CRMUser.objects.all()
+        return get_user_model().objects.all()
 
     def get_serializer_context(self):
         """

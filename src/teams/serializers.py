@@ -2,11 +2,11 @@
 Serializers for the User and Team models.
 """
 
-from rest_framework import serializers
-from rest_framework_simplejwt.serializers import PasswordField
-
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import get_user_model
+
+from rest_framework import serializers
+from rest_framework_simplejwt.serializers import PasswordField
 
 from .models import Team
 

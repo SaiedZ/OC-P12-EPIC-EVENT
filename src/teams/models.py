@@ -1,3 +1,7 @@
+"""
+Custom user and team models.
+"""
+
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
@@ -7,6 +11,7 @@ from .managers import CustomAccountManager, UniqueNameManager
 
 
 class CRMUser(AbstractBaseUser, PermissionsMixin):
+    """The user of the EPICEVENT CRM."""
 
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',

@@ -1,3 +1,7 @@
+"""
+Custom permissions for CRUD operations on CRMUser and Team models.
+"""
+
 import logging
 
 from rest_framework.permissions import BasePermission, SAFE_METHODS
