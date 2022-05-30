@@ -10,15 +10,14 @@ class ClientViewSet(viewsets.ModelViewSet):
 
     serializer_class = ClientSerializer
     permission_classes = [IsManager | HasClientPermissions]
-    filter_fields = [
-        'phone',
-        'mobile',
-        'email',
-        'first_name',
-        'last_name',
-        'compagny_name',
-        'potential',
-    ]
+    filter_fields = {
+        'phone': ['icontains', 'iexact'],
+        'mobile': ['icontains', 'iexact'],
+        'email': ['icontains', 'iexact'],
+        'first_name': ['icontains', 'iexact'],
+        'last_name': ['icontains', 'iexact'],
+        'compagny_name': ['icontains', 'iexact'],
+    }
 
     def get_queryset(self):
         """

@@ -1,4 +1,8 @@
+import logging
+
 from rest_framework.permissions import BasePermission
+
+logger = logging.getLogger('custom_logger')
 
 
 class HasEventPermission(BasePermission):
@@ -17,18 +21,38 @@ class HasEventPermission(BasePermission):
     def has_permission(self, request, view):
         if request.user.is_authenticated and request.user.team is not None:
             if view.action == 'create':
-                return request.user.team.name == "Sale"
-            return request.user.team.name in [
+                if request.user.team.name == "Sale":
+                    return True
+                logger.warning(f"Unauthorized user ` {request.user} ` "
+                               f"tried to access {request.path} "
+                               f"using  {request.method=}")
+                return False
+
+            if request.user.team.name in [
                 "Management", "Sale", "Support"
-            ]
+            ]:
+                return True
+        logger.warning(f"Unauthorized user ` {request.user} ` "
+                       f"tried to access {request.path} "
+                       f"using  {request.method=}")
         return False
 
     def has_object_permission(self, request, view, obj):
         if view.action == 'retrieve':
             return True
         if view.action == 'close_event':
-            return request.user.id == obj.support_contact.id
-        return request.user.id == obj.support_contact.id
+            if request.user.id == obj.support_contact.id:
+                return True
+            logger.warning(f"Unauthorized user ` {request.user} ` "
+                           f"tried to access {request.path} "
+                           f"using  {request.method=}")
+            return False
+        if request.user.id == obj.support_contact.id:
+            return True
+        logger.warning(f"Unauthorized user ` {request.user} ` "
+                       f"tried to access {request.path} "
+                       f"using  {request.method=}")
+        return False
 
 
 class ClosedEventsToReadOnly(BasePermission):
@@ -39,11 +63,21 @@ class ClosedEventsToReadOnly(BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         if view.action not in ["retrieve", "destroy"]:
-            return obj.status.name == "ongoing"
+            if obj.status.name != "ongoing":
+                logger.warning(f"Unauthorized user ` {request.user} ` "
+                               f"tried to access {request.path} "
+                               f"using  {request.method=}")
+                return False
         return True
 
 
 class HasEventStatusPermission(BasePermission):
     """Event Status can't only be managed by superuser."""
     def has_permission(self, request, view):
-        return request.user.is_superuser and request.user.is_authenticated
+        if request.user.is_superuser and request.user.is_authenticated:
+            return True
+
+        logger.warning(f"Unauthorized user ` {request.user} ` "
+                       f"tried to access {request.path} "
+                       f"using  {request.method=}")
+        return False
