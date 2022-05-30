@@ -58,6 +58,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'drf_spectacular',
+    'django_filters',
 ]
 
 
@@ -164,7 +165,8 @@ REST_FRAMEWORK = {
         # "rest_framework.authentication.BasicAuthentication",
     ],
     "DEFAULT_FILTER_BACKENDS": [
-        "url_filter.integrations.drf.DjangoFilterBackend",
+        # "url_filter.integrations.drf.DjangoFilterBackend",
+        'django_filters.rest_framework.DjangoFilterBackend',
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     #   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
