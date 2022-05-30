@@ -1,3 +1,7 @@
+"""
+Django admin customization for Event and EventStatus models.
+"""
+
 from django.contrib import admin
 
 from events.models import Event, EventStatus
