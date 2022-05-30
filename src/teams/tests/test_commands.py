@@ -12,10 +12,8 @@ class CommandTests(TestCase):
     """Test commands."""
 
     def test_init_teams(self):
+
         call_command('init_teams')
 
-        teams_number = Team.objects.all().count()
-        self.assertEqual(len(TEAMS), teams_number)
-
-        for id, team in enumerate(TEAMS, start=1):
-            self.assertEqual(team['name'], Team.objects.get(id=id).name)
+        for team in TEAMS:
+            self.assertTrue(Team.objects.filter(name=team['name']).exists())

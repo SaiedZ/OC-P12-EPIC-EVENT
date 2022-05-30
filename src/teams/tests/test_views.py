@@ -49,7 +49,7 @@ class PrivateUserAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.management_team = Team.objects.create(name="management")
+        self.management_team = Team.objects.create(name="Management")
         self.admin_user = create_user(
             is_superuser=True,
             email="admin@example.com",
