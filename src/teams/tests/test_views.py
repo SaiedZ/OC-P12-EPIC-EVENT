@@ -101,8 +101,8 @@ class PrivateUserAPITests(TestCase):
 
         self.client.force_authenticate(sale_user)
         res = self.client.get(USER_LIST_URL)
-        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
 
         self.client.force_authenticate(support_user)
         res = self.client.get(USER_LIST_URL)
-        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(res.status_code, status.HTTP_403_FORBIDDEN)
