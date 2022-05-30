@@ -12,6 +12,7 @@ from events.permissions import (
     HasEventPermission,
     ClosedEventsToReadOnly
 )
+from events.filters import EventFilter
 
 logger = logging.getLogger('custom_logger')
 
@@ -21,16 +22,7 @@ class EventViewSet(viewsets.ModelViewSet):
 
     serializer_class = EventSerializer
     permission_classes = [HasEventPermission & ClosedEventsToReadOnly]
-    filter_fields = [
-        'support_contact',
-        'contract',
-        'date_created',
-        'date_updated',
-        'status',
-        'attendees',
-        'event_date',
-        'notes',
-    ]
+    filterset_class = EventFilter
 
     def get_queryset(self):
         """

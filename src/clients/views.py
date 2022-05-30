@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from clients import models
 from clients.serializers import ClientSerializer
 from clients.permissions import IsManager, HasClientPermissions
+from clients.filters import ClientFilter
 
 
 class ClientViewSet(viewsets.ModelViewSet):
@@ -10,14 +11,7 @@ class ClientViewSet(viewsets.ModelViewSet):
 
     serializer_class = ClientSerializer
     permission_classes = [IsManager | HasClientPermissions]
-    filter_fields = {
-        'phone': ['icontains', 'iexact'],
-        'mobile': ['icontains', 'iexact'],
-        'email': ['icontains', 'iexact'],
-        'first_name': ['icontains', 'iexact'],
-        'last_name': ['icontains', 'iexact'],
-        'compagny_name': ['icontains', 'iexact'],
-    }
+    filter_class = ClientFilter
 
     def get_queryset(self):
         """

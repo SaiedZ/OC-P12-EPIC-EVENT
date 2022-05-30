@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from . import models
 from . import permissions as team_permissions
 from .serializers import CRMUserSerializer, TeamSerializer
+from .filters import CRMUserFilter
 
 
 class CRMUserViewSet(viewsets.ModelViewSet):
@@ -20,13 +21,7 @@ class CRMUserViewSet(viewsets.ModelViewSet):
     permission_classes = [
         team_permissions.IsAuthenticatedAndSuperUserOrFromManagement
     ]
-    filter_fields = [
-        'username',
-        'email',
-        'team',
-        'first_name',
-        'last_name',
-    ]
+    filter_class = CRMUserFilter
 
     def get_queryset(self):
         """
