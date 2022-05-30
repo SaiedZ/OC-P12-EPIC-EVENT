@@ -1,6 +1,7 @@
 """
 Tests for the teams models.
 """
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
@@ -24,7 +25,7 @@ class CRMUserModelTests(TestCase):
         self.assertEqual(super_user.is_superuser, True)
         self.assertEqual(str(super_user), "First_name Last_name")
 
-    def test_new_doesnt_work_if_is_superuser_false(self):
+    def test_new_superuser_doesnt_work_if_is_superuser_false(self):
         user_model = get_user_model()
         with self.assertRaises(ValueError):
             user_model.objects.create_superuser(
@@ -44,10 +45,7 @@ class CRMUserModelTests(TestCase):
             )
 
     def test_crmuser_str(self):
-
-        """
-        Testing whether CRMUser's __str__ method is implemented properly
-        """
+        """Testing whether CRMUser's __str__ method is implemented properly."""
 
         user_model = get_user_model()
         user = user_model.objects.create_user(
@@ -60,7 +58,11 @@ class CRMUserModelTests(TestCase):
 class TeamModelTests(TestCase):
 
     def test_new_team_creation(self):
-
         team_test = Team.objects.create(name="Test Team")
         self.assertEqual(team_test.name, "Test Team")
         self.assertEqual(str(team_test), "Test Team")
+
+    def test_cant_create_team_without_name(self):
+        # with self.assertRaises(ValueError):
+        team = Team.objects.create(name="")
+        print("test", type(team))
