@@ -9,6 +9,7 @@ from contracts.permissions import (
     ContractPermissionSafeAndPost,
     SignedContractTReadOnly
 )
+from contracts.filters import ContractFilter
 
 
 class ContractViewSet(viewsets.ModelViewSet):
@@ -18,15 +19,7 @@ class ContractViewSet(viewsets.ModelViewSet):
     permission_classes = [
         ContractPermissionSafeAndPost & SignedContractTReadOnly
     ]
-    filter_fields = [
-        'sales_contact',
-        'client',
-        'date_created',
-        'date_updated',
-        'status',
-        'amount',
-        'payment_due',
-    ]
+    filterset_class = ContractFilter
 
     def get_queryset(self):
         """
