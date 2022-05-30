@@ -1,0 +1,10 @@
+[run]
+
+omit =
+    # omit anything in a migrations directory anywhere
+    */migrations/*
+    # omit everything in tests directory
+    */tests/*
+    # omit this single file
+    */__init__.py
+

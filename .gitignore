@@ -1,6 +1,7 @@
 # Custom files and folders
 commands.txt
 .vscode
+logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
