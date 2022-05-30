@@ -4,6 +4,7 @@ Custom user and team models.
 
 from django.db import models
 from django.core.validators import RegexValidator
+from django.core.validators import MinLengthValidator
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
@@ -43,7 +44,12 @@ class CRMUser(AbstractBaseUser, PermissionsMixin):
 class Team(models.Model):
     """Represents the Team of the user."""
 
-    name = models.CharField(_("Team name"), max_length=200, unique=True)
+    name = models.CharField(
+        _("Team name"),
+        max_length=200,
+        validators=[MinLengthValidator(2)],
+        unique=True,
+    )
 
     objects = UniqueNameManager()
 
