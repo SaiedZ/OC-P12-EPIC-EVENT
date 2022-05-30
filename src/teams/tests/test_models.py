@@ -61,8 +61,3 @@ class TeamModelTests(TestCase):
         team_test = Team.objects.create(name="Test Team")
         self.assertEqual(team_test.name, "Test Team")
         self.assertEqual(str(team_test), "Test Team")
-
-    def test_cant_create_team_without_name(self):
-        # with self.assertRaises(ValueError):
-        team = Team.objects.create(name="")
-        print("test", type(team))
