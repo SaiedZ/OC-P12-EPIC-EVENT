@@ -131,3 +131,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+src/teams/__pycache__/permissions.cpython-310.pyc
+src/teams/__pycache__/permissions.cpython-310.pyc
+src/teams/__pycache__/models.cpython-310.pyc
+src/teams/__pycache__/permissions.cpython-310.pyc
+src/teams/__pycache__/views.cpython-310.pyc
+src/teams/__pycache__/urls.cpython-310.pyc
+src/teams/__pycache__/serializers.cpython-310.pyc

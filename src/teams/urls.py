@@ -11,6 +11,10 @@ router = DefaultRouter()
 router.register(r'users', views.CRMUserViewSet, basename='user')
 router.register(r'teams', views.TeamViewSet, basename='team')
 
+
+app_name = 'teams'
+
+
 urlpatterns = [
     path('', include(router.urls)),
 ]

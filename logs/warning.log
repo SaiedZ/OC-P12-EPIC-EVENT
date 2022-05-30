@@ -2,3 +2,11 @@
 2022-05-29 22:09:22,478 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
 2022-05-29 22:09:22,485 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
 2022-05-29 22:09:22,485 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/teams/
+2022-05-30 19:09:34,563 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:18:11,675 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:19:27,737 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:20:29,824 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:27:42,922 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:28:11,116 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:28:55,458 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-05-30 19:33:44,587 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
