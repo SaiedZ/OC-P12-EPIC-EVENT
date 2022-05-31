@@ -23,9 +23,9 @@ we have built this API respecting the recommendations of the OWASP top [10 recom
 
 Once server is running, API specifications are accessible on those urls with different formats:
 
-    * Swagger-ui view: [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
-    * ReDoc view: [http://127.0.0.1:8000/api/schema/redoc/](http://127.0.0.1:8000/api/schema/redoc/)
-    * YAML schema: [http://127.0.0.1:8000/api/schema/](http://127.0.0.1:8000/api/schema/)
+*   Swagger-ui view: [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
+*   ReDoc view: [http://127.0.0.1:8000/api/schema/redoc/](http://127.0.0.1:8000/api/schema/redoc/)
+*   YAML schema: [http://127.0.0.1:8000/api/schema/](http://127.0.0.1:8000/api/schema/)
 
 ## :mag: Technologies
 
