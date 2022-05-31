@@ -14,7 +14,6 @@ decorator==5.1.1
 Django==3.2
 django-extensions==3.1.5
 django-filter==21.1
-django-url-filter==0.3.15
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.1.0
 drf-spectacular==0.22.1
