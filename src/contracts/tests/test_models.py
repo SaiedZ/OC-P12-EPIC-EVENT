@@ -7,7 +7,6 @@ from datetime import datetime
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from teams.models import Team
 from clients.models import Client
 from contracts.models import Contract
 
