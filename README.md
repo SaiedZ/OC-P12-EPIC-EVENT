@@ -60,29 +60,24 @@ python -m venv .env
 .env\Scripts\activate.bat
 ```
 
-**7. Move to src folder**
-```bash
-cd src
-```
-
-**8. Install the packages required to run the tool from the `requirements.txt` file**
+**7. Install the packages required to run the tool from the `requirements.txt` file**
 ```bash
 pip install -r requirements.txt
 ```
 
-**9. Configure PostgreSQL database**
+**8. Configure PostgreSQL database**
 
 You first must install postgresSQL and configure a database.
 See official [PostgreSQL doc](https://www.postgresql.org/docs/14/tutorial.html) and [official Django doc](https://docs.djangoproject.com/en/4.0/ref/databases/#postgresql-notes) for more info.
 You need to create a database for the app, and then configure it in epicevents/settings.py.
 
-**10. Initiate Teams and EventStatus models**
+**9. Initiate Teams and EventStatus models**
 ```bash
 pyhton manage.py init_teams
 python manage.py init_event_status
 ```
 
-**11. Initiate PostgreSQL database**
+**10. Initiate PostgreSQL database**
 
 Open a terminal and navigate into the root of the project (i.e. the folder where is situated manage.py) , and run the following commands:
 
