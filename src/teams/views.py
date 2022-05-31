@@ -21,7 +21,7 @@ class CRMUserViewSet(viewsets.ModelViewSet):
     permission_classes = [
         team_permissions.IsAuthenticatedAndSuperUserOrFromManagement
     ]
-    filter_class = CRMUserFilter
+    filterset_class = CRMUserFilter
 
     def get_queryset(self):
         """
