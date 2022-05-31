@@ -21,6 +21,11 @@ we have built this API respecting the recommendations of the OWASP top [10 recom
 
 [API documentation](https://documenter.getpostman.com/view/19779552/Uz59Me61)
 
+Once server is running, API specifications are accessible on those urls with different formats:
+
+    * Swagger-ui view: [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
+    * ReDoc view: [http://127.0.0.1:8000/api/schema/redoc/](http://127.0.0.1:8000/api/schema/redoc/)
+    * YAML schema: [http://127.0.0.1:8000/api/schema/](http://127.0.0.1:8000/api/schema/)
 
 ## :mag: Technologies
 
@@ -30,21 +35,23 @@ we have built this API respecting the recommendations of the OWASP top [10 recom
 
 ## 💿 How to setup the API ?
 
-1. First, you will need to download [the source code](https://github.com/SaiedZ/OC-P12-EPIC-EVENT.git) from GitHub.
-2. Unzip the folder
-3. Go to the unzipped folder using your terminal
-4. You can also clone the repo without dowloading the folder. In this case, don't follow the steps above and just: use these commands (git must be installed):
+**1. First, you will need to download [the source code](https://github.com/SaiedZ/OC-P12-EPIC-EVENT.git) from GitHub.**
+
+**2. Unzip the folder**
+
+**3. Go to the unzipped folder using your terminal**
+
+**4. You can also clone the repo without dowloading the folder. In this case, don't follow the steps above and just: use these commands (git must be installed):**
 ```bash
 git clone https://github.com/SaiedZ/OC-P12-EPIC-EVENT.git
 cd OC-P12-EPIC-EVENT
 ```
-5. Create your virtual environment with the following command (here I call it .env, but you can call it another way)
+**5. Create your virtual environment with the following command (here I call it .env, but you can call it another way)**
 ```bash
 python -m venv .env
 ```
-6. Activate the virtual environment with the following command
- 
-  * on Unix or Mac :
+**6. Activate the virtual environment with the following command**
+   * on Unix or Mac :
 ```shell
  source .env/bin/Activate
 ```
@@ -53,23 +60,46 @@ python -m venv .env
 .env\Scripts\activate.bat
 ```
 
-7. Move to src folder
+**7. Move to src folder**
 ```bash
 cd src
 ```
 
-8. Install the packages required to run the tool from the `requirements.txt` file
+**8. Install the packages required to run the tool from the `requirements.txt` file**
 ```bash
 pip install -r requirements.txt
 ```
 
-9. Now y can start the development server
+**9. Configure PostgreSQL database**
 
+You first must install postgresSQL and configure a database.
+See official [PostgreSQL doc](https://www.postgresql.org/docs/14/tutorial.html) and [official Django doc](https://docs.djangoproject.com/en/4.0/ref/databases/#postgresql-notes) for more info.
+You need to create a database for the app, and then configure it in epicevents/settings.py.
 
-For more information, refer to the python.org documentation :
+**10. Initiate Teams and EventStatus models**
+```bash
+pyhton manage.py init_teams
+python manage.py init_event_status
+```
 
-[Virtual envirement tutorial](https://docs.python.org/3/tutorial/venv.html)
+**11. Initiate PostgreSQL database**
 
+Open a terminal and navigate into the root of the project (i.e. the folder where is situated manage.py) , and run the following commands:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## Create a superuser (administrator)
+
+Open a terminal and navigate into the root of the project (i.e. the folder where is situated manage.py) , and run the following command:
+```bash
+python manage.py createsuperuser
+```
+You will be prompted an email, username, first and last name, and a password. That's it, the superuser is created !
+
+The admin page will be accessible at http://127.0.0.1:8000/admin.
 
 ## ⚙️ Launch the development server
 
@@ -83,3 +113,6 @@ python manage.py runserver
 Of course, you must first ensure that you have activated your virtual environment and that you are in the folder that contains the `manage.py` file.
 
 Once the development server is launched, you can start using the API by following the documentation.
+
+API will be accessible (with Postman for example) at http://127.0.0.1:8000 .
+
