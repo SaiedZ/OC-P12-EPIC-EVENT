@@ -91,7 +91,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-## Create a superuser (administrator)
+## :sunglasses: Create a superuser (administrator)
 
 Open a terminal and navigate into the root of the project (i.e. the folder where is situated manage.py) , and run the following command:
 ```bash
@@ -116,7 +116,7 @@ Once the development server is launched, you can start using the API by followin
 
 API will be accessible (with Postman for example) at http://127.0.0.1:8000 .
 
-## Logging
+## :detective: Logging
 
 Logs are registered in two files at the root of the project in a folder named ` logs `:
 
