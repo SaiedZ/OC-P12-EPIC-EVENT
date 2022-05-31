@@ -30,13 +30,13 @@ we have built this API respecting the recommendations of the OWASP top [10 recom
 
 ## 💿 How to setup the API ?
 
-1. First, you will need to download [the source code](https://github.com/SaiedZ/LITReviewWebApp.git) from GitHub.
+1. First, you will need to download [the source code](https://github.com/SaiedZ/OC-P12-EPIC-EVENT.git) from GitHub.
 2. Unzip the folder
 3. Go to the unzipped folder using your terminal
 4. You can also clone the repo without dowloading the folder. In this case, don't follow the steps above and just: use these commands (git must be installed):
 ```bash
-git clone https://github.com/SaiedZ/issuestrackingapi.git
-cd LITReviewWebApp
+git clone https://github.com/SaiedZ/OC-P12-EPIC-EVENT.git
+cd OC-P12-EPIC-EVENT
 ```
 5. Create your virtual environment with the following command (here I call it .env, but you can call it another way)
 ```bash
@@ -82,4 +82,4 @@ python manage.py runserver
 ``` 
 Of course, you must first ensure that you have activated your virtual environment and that you are in the folder that contains the `manage.py` file.
 
-Once the development server is launched, you can start using the API by following the documentation [API documentation](https://documenter.getpostman.com/view/19779552/UVkqqZyf)
+Once the development server is launched, you can start using the API by following the documentation.
