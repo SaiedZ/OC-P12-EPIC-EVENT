@@ -15,7 +15,7 @@ Part of Open Classrooms "Python developper", 12th Project.
 
 The EpicEvents CRM API allows users to manage data related to users, clients, contracts and events.
 
-Our API allows users to create various projects, add users, create issues within projects and comment on them. It also allows the assignment of tags, priorities to projects and issues. Finally, it also manages permissions for editing and deletion.
+Our API allows users to make CRUD operations if permissions are respected. Permissions are based on the team of the user for some models and on support user or sale user for some other models. They are detailled in the API documentation.
 
 Our API is organized around [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer). It uses standard HTTP response codes, authentication, and verbs.
 
@@ -23,13 +23,14 @@ we have built this API respecting the recommendations of the OWASP top [10 recom
 
 ##  📖  API Documentation
 
-[API documentation](https://documenter.getpostman.com/view/19779552/UVkqqZyf)
+[API documentation](https://documenter.getpostman.com/view/19779552/Uz59Me61)
 
 
 ## :mag: Technologies
 
 *   Django Rest Framework as backend
-*   JWT (JSON Web Token) the backend authentication
+*   Postgresql as database
+*   JWT (JSON Web Token) for the backend authentication
 
 ## 💿 How to setup the API ?
 
