@@ -6,9 +6,7 @@ Training django and DRF project.
 Part of Open Classrooms "Python developper", 12th Project.
 
 <br>
-<br>
 <span><img src="https://img.shields.io/badge/DJANGO-3.2-brightgreen?style=for-the-badge&logo=django&logoColor=white">   <img src="https://img.shields.io/badge/Python-3.10.0-brightgreen?style=for-the-badge&logo=python&logoColor=white">   <img src="https://img.shields.io/badge/Django Rest Framework-3.13.1-brightgreen?style=for-the-badge&logo=django&logoColor=white">   </span>
-<br>
 <br>
 
 ## :page_with_curl: What's it ?
