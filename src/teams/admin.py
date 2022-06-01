@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 
+from CRM.admin import crm_admin_site
 from .models import Team
 
 
@@ -14,6 +15,7 @@ class UserAdminConfig(UserAdmin):
 
     search_fields = ("first_name", "email", "username", "team")
     list_filter = ("email", "username", "team")
+    readonly_fields = ("is_staff", "is_active")
     ordering = (
         "team",
         "first_name",
@@ -59,5 +61,14 @@ class UserAdminConfig(UserAdmin):
     )
 
 
-admin.site.register(get_user_model(), UserAdminConfig)
+class TeamADmin(admin.ModelAdmin):
+
+    fields = ["name"]
+    list_display = ("name",)
+
+
+admin.site.register(get_user_model())
 admin.site.register(Team)
+
+crm_admin_site.register(get_user_model(), UserAdminConfig)
+crm_admin_site.register(Team, TeamADmin)

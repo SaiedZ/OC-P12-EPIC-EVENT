@@ -21,9 +21,12 @@ from drf_spectacular.views import (
     SpectacularSwaggerView
 )
 
+from CRM.admin import crm_admin_site
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('epic-event-crm-admin/', crm_admin_site.urls),
     path('api/', include('rest_framework.urls')),
     path('api/', include('authentication.urls')),
     path('api/', include('teams.urls')),
