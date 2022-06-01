@@ -37,6 +37,10 @@ class CRMUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", "first_name", "last_name"]
 
+    class Meta:
+        verbose_name = ("CRM User")
+        verbose_name_plural = ("CRM Users")
+
     def __str__(self):
         return f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
 
