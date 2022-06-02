@@ -12,9 +12,7 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 from teams.models import Team
-from teams.serializers import CRMUserSerializer, TeamSerializer
 from clients.models import Client
-from clients.serializers import ClientSerializer
 from contracts.models import Contract
 from contracts.serializers import ContractSerializer
 

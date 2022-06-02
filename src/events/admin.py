@@ -6,7 +6,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib import admin
 from django.contrib import auth
-from django.contrib import messages
 
 from CRM.admin import crm_admin_site
 from events.models import Event, EventStatus
@@ -56,7 +55,8 @@ class EventAdmin(admin.ModelAdmin):
             "description": "Only user from support departement."
         }),
         ("Commercial", {"fields": ("contract", "status")}),
-        ("Organisation info", {"fields": ("attendees", "event_date", "notes")}),
+        ("Organisation info",
+         {"fields": ("attendees", "event_date", "notes")}),
         (
             "Additionnal informations", {
                 "fields": ("date_created", "date_updated"),

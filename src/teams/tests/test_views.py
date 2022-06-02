@@ -10,7 +10,7 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 from teams.models import Team
-from teams.serializers import CRMUserSerializer, TeamSerializer
+from teams.serializers import CRMUserSerializer
 
 
 USER_LIST_URL = reverse("teams:user-list")
