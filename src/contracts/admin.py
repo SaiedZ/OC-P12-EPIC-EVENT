@@ -26,6 +26,14 @@ class ContractForm(forms.ModelForm):
             return sales_contact
         raise ValidationError("Sales contact must be part of the Sale team.")
 
+    def save(self, commit=False):
+        contract = super().save(commit=commit)
+        client = contract.client
+        if contract.status and client.potential:
+            client.potential = False
+            client.save()
+        return contract
+
 
 class ContractAdmin(admin.ModelAdmin):
 
@@ -83,7 +91,13 @@ class ContractAdmin(admin.ModelAdmin):
             user = request.user._wrapped
         else:
             user = request.user
-        queryset.filter(sales_contact_id=user).update(status=True)
+        for contract in queryset:
+            if contract.sales_contact == user and not contract.status:
+                contract.staus = True
+                client = contract.client
+                client.potential = False
+                contract.save()
+                client.save()
 
     sign_contract.short_description = "Sign contract"
 
@@ -100,7 +114,7 @@ class ContractAdmin(admin.ModelAdmin):
             request._cached_user = auth.get_user(request)
         return request._cached_user
 
-    def has_add_permission(self, request):
+    def has_add_permission(self, request):  # sourcery skip: class-extract-method # noqa
         user = self.get_user(request)
         if user.is_authenticated and user.team is not None:
             return user.team.name in ['Sale', 'Management']
@@ -111,7 +125,7 @@ class ContractAdmin(admin.ModelAdmin):
             return True
         user = self.get_user(request)
         if user.is_authenticated:
-            return user == obj.sales_contact and obj.status == False
+            return user == obj.sales_contact and not obj.status
         return False
 
     def has_delete_permission(self, request, obj=None):
