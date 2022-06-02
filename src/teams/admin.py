@@ -3,6 +3,7 @@ Django admin customization for CRMUSer and Team models.
 """
 
 from django.contrib import admin
+from django.contrib import auth
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 
@@ -60,15 +61,58 @@ class UserAdminConfig(UserAdmin):
         ),
     )
 
+    def get_user(self, request):
+        if not hasattr(request, '_cached_user'):
+            request._cached_user = auth.get_user(request)
+        return request._cached_user
 
-class TeamADmin(admin.ModelAdmin):
+    def is_management_permission(self, request):
+        user = self.get_user(request)
+        if user.is_authenticated and user.team is not None:
+            return user.team.name in ['Management']
+        return False
+
+    def has_add_permission(self, request):
+        return self.is_management_permission(request)
+
+    def has_change_permission(self, request, obj=None):
+        return self.is_management_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return self.is_management_permission(request)
+
+    def has_view_permission(self, request, obj=None):
+        return self.is_management_permission(request)
+
+    def has_module_permission(self, request):
+        return self.is_management_permission(request)
+
+
+class TeamAdmin(admin.ModelAdmin):
 
     fields = ["name"]
     list_display = ("name",)
+
+    def get_user(self, request):
+        if not hasattr(request, '_cached_user'):
+            request._cached_user = auth.get_user(request)
+        return request._cached_user
+
+    def is_management_permission(self, request):
+        user = self.get_user(request)
+        if user.is_authenticated and user.team is not None:
+            return user.team.name in ['Management']
+        return False
+
+    def has_view_permission(self, request, obj=None):
+        return self.is_management_permission(request)
+
+    def has_module_permission(self, request):
+        return self.is_management_permission(request)
 
 
 admin.site.register(get_user_model())
 admin.site.register(Team)
 
 crm_admin_site.register(get_user_model(), UserAdminConfig)
-crm_admin_site.register(Team, TeamADmin)
+crm_admin_site.register(Team, TeamAdmin)
