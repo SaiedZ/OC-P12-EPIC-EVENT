@@ -9,7 +9,7 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 logger = logging.getLogger('custom_logger')
 
 
-class IsAuthenticatedAndSuperUserOrFromManagement(BasePermission):
+class IsSuperUserOrFromManagement(BasePermission):
     """
     A custom permission class that checks if the current user has the right
     permissions to perform a given action.
@@ -32,7 +32,7 @@ class IsAuthenticatedAndSuperUserOrFromManagement(BasePermission):
         return False
 
 
-class IsAuthenticatedAndSuperUserOrManagerForSafeMethods(BasePermission):
+class IsSuperUserOrManagerForSafeMethods(BasePermission):
     """
     A custom permission class that checks if the current user has the right
     permissions to perform a given action.

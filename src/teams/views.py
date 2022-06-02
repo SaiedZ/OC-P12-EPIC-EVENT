@@ -4,9 +4,8 @@ Views for the user API.
 
 from django.contrib.auth import get_user_model
 
+from rest_framework import mixins
 from rest_framework import viewsets
-from rest_framework import status
-from rest_framework.response import Response
 
 from . import models
 from . import permissions as team_permissions
@@ -19,7 +18,7 @@ class CRMUserViewSet(viewsets.ModelViewSet):
 
     serializer_class = CRMUserSerializer
     permission_classes = [
-        team_permissions.IsAuthenticatedAndSuperUserOrFromManagement
+        team_permissions.IsSuperUserOrFromManagement
     ]
     filterset_class = CRMUserFilter
 
@@ -38,25 +37,16 @@ class CRMUserViewSet(viewsets.ModelViewSet):
         return context
 
 
-class TeamViewSet(viewsets.ModelViewSet):
-    """ModelViewSet for Team."""
+class TeamViewSet(mixins.CreateModelMixin,
+                  mixins.DestroyModelMixin,
+                  mixins.ListModelMixin,
+                  viewsets.GenericViewSet):
+    """ModelViewSet for Team.
+
+    A viewset that provides `create()`, `destroy()` and `list()` actions.
+    """
 
     serializer_class = TeamSerializer
     queryset = models.Team.objects.all()
     permission_classes = [
-        team_permissions.IsAuthenticatedAndSuperUserOrManagerForSafeMethods]
-
-    # Raising error message for unallwoed methods
-    def partial_update(self, request, pk=None):
-        return self._get_response_object("Partial update")
-
-    def update(self, request, pk=None):
-        return self._get_response_object("Update")
-
-    def retrieve(self, request, pk=None):
-        return self._get_response_object("Retrieve")
-
-    def _get_response_object(self, method_name):
-        response = {
-            'message': f'{method_name} function is not offered in this path.'}
-        return Response(response, status=status.HTTP_403_FORBIDDEN)
+        team_permissions.IsSuperUserOrManagerForSafeMethods]
