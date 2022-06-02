@@ -61,12 +61,24 @@ class UserAdminConfig(UserAdmin):
         ),
     )
 
+    # handle the permissions to perform CRUD on CRMUser and Temas data
+
     def get_user(self, request):
+        """
+        Return the request's user if it exists.
+        :param request: The http request object.
+        :return: user.
+        """
         if not hasattr(request, '_cached_user'):
             request._cached_user = auth.get_user(request)
         return request._cached_user
 
     def is_management_permission(self, request):
+        """
+        Verrify if the request user belong to the management team.
+        :param request: The http request object.
+        :return: boolean.
+        """
         user = self.get_user(request)
         if user.is_authenticated and user.team is not None:
             return user.team.name in ['Management']
@@ -89,6 +101,7 @@ class UserAdminConfig(UserAdmin):
 
 
 class TeamAdmin(admin.ModelAdmin):
+    """Define the admin pages for Teams."""
 
     fields = ["name"]
     list_display = ("name",)
@@ -99,6 +112,11 @@ class TeamAdmin(admin.ModelAdmin):
         return request._cached_user
 
     def is_management_permission(self, request):
+        """
+        Verrify if the request user belong to the management team.
+        :param request: The http request object.
+        :return: boolean.
+        """
         user = self.get_user(request)
         if user.is_authenticated and user.team is not None:
             return user.team.name in ['Management']
