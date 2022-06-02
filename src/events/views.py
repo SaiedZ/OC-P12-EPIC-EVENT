@@ -1,5 +1,10 @@
+"""
+Views for events app.
+"""
+
 import logging
 
+from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework import status
@@ -73,23 +78,15 @@ class EventViewSet(viewsets.ModelViewSet):
         return Response(content, status=status.HTTP_409_CONFLICT)
 
 
-class EventStatusViewSet(viewsets.ModelViewSet):
+class EventStatusViewSet(mixins.CreateModelMixin,
+                         mixins.DestroyModelMixin,
+                         mixins.ListModelMixin,
+                         viewsets.GenericViewSet):
+    """ModelViewSet for EventStatus model.
+
+    A viewset that provides `create()`, `destroy()` and `list()` actions.
+    """
 
     serializer_class = EventStatusSerializer
     permission_classes = [HasEventStatusPermission]
     queryset = models.EventStatus.objects.all()
-
-    # Raising error message for unallwoed methods
-    def partial_update(self, request, pk=None):
-        return self._get_response_object("Partial update")
-
-    def update(self, request, pk=None):
-        return self._get_response_object("Update")
-
-    def retrieve(self, request, pk=None):
-        return self._get_response_object("Retrieve")
-
-    def _get_response_object(self, method_name):
-        response = {
-            'message': f'{method_name} function is not offered in this path.'}
-        return Response(response, status=status.HTTP_403_FORBIDDEN)
