@@ -11,6 +11,7 @@ class Contract(models.Model):
         to=CRMUser,
         related_name="sales_contact",
         on_delete=models.PROTECT,
+        help_text="Must be part of the sale team.",
     )
     client = models.ForeignKey(
         to=Client,

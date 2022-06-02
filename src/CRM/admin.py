@@ -13,3 +13,8 @@ class EpicEventCRMAdmin(admin.AdminSite):
 
 
 crm_admin_site = EpicEventCRMAdmin(name="CRMAdmin")
+
+# models = django.apps.apps.get_models()
+
+# admin.site.register(admin.models.LogEntry)
+# admin.site.register(sessions.models.Session)
