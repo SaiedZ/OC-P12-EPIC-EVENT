@@ -1,3 +1,7 @@
+"""
+Views for the authentication API.
+"""
+
 from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import (RefreshToken,
@@ -22,9 +26,21 @@ class LogoutView(APIView):
 
 
 class LogoutAllView(APIView):
+    """Allow users to logout from all devices."""
+
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
+        """Post methode to handle logging out.
+
+        Will get all the tokens related to the request user and blacklist them.
+
+        Args:
+            request: Http request
+
+        Returns:
+            response: Http response
+        """
         tokens = OutstandingToken.objects.filter(user_id=request.user.id)
         for token in tokens:
             t, _ = BlacklistedToken.objects.get_or_create(token=token)

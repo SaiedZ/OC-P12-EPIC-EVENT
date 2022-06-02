@@ -1,3 +1,7 @@
+"""
+URL mappings for the authebntication API.
+"""
+
 from django.urls import path
 from authentication import views
 
