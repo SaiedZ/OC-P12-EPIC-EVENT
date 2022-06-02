@@ -94,7 +94,9 @@ python manage.py createsuperuser
 ```
 You will be prompted an email, username, first and last name, and a password. That's it, the superuser is created !
 
-The admin page will be accessible at http://127.0.0.1:8000/admin.
+The admin page will be accessible at http://127.0.0.1:8000/admin
+
+The admin page for CRM users will be accessible at http://127.0.0.1:8000/epic-event-crm-admin/
 
 ## ⚙️ Launch the development server
 
