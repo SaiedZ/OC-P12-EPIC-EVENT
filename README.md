@@ -9,7 +9,9 @@ Part of Open Classrooms "Python developper", 12th Project.
 
 ## :page_with_curl: What's it ?
 
-The EpicEvents CRM API allows users to manage data related to users, clients, contracts and events.
+The EpicEvents CRM API allows users to manage data related to users, clients, contracts and events throught API endpoints or using a custom admin interface. 
+
+The admin page for CRM users will be accessible at http://127.0.0.1:8000/epic-event-crm-admin/
 
 Our API allows users to make CRUD operations if permissions are respected. Permissions are based on the team of the user for some models and on support user or sale user for some other models. They are detailled in the API documentation.
 
@@ -94,7 +96,9 @@ python manage.py createsuperuser
 ```
 You will be prompted an email, username, first and last name, and a password. That's it, the superuser is created !
 
-The admin page will be accessible at http://127.0.0.1:8000/admin.
+The admin page will be accessible at http://127.0.0.1:8000/admin
+
+The admin page for CRM users will be accessible at http://127.0.0.1:8000/epic-event-crm-admin/
 
 ## ⚙️ Launch the development server
 
