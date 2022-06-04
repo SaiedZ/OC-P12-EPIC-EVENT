@@ -1,14 +1,17 @@
-# EpicEvents CRM API
+# <p align=center> EpicEvents CRM API </p>
 
 <br>
-<span><img src="https://img.shields.io/badge/DJANGO-3.2-brightgreen?style=for-the-badge&logo=django&logoColor=white">   <img src="https://img.shields.io/badge/Python-3.10.0-brightgreen?style=for-the-badge&logo=python&logoColor=white">   <img src="https://img.shields.io/badge/Django Rest Framework-3.13.1-brightgreen?style=for-the-badge&logo=django&logoColor=white">   </span>
+<p align=center> <span><img src="https://img.shields.io/badge/DJANGO-3.2-brightgreen?style=for-the-badge&logo=django&logoColor=white">   <img src="https://img.shields.io/badge/Python-3.10.0-brightgreen?style=for-the-badge&logo=python&logoColor=white">   <img src="https://img.shields.io/badge/Django Rest Framework-3.13.1-brightgreen?style=for-the-badge&logo=django&logoColor=white">   </span> </p>
 <br>
 <br>
 Training django and DRF project.
 Part of Open Classrooms "Python developper", 12th Project.
 
-## :page_with_curl: What's it ?
+<hr>
+<br>
 
+## <p align=center> :page_with_curl: What's it ? </p>
+<br>
 The EpicEvents CRM API allows users to manage data related to users, clients, contracts and events throught API endpoints or using a custom admin interface. 
 
 The admin page for CRM users will be accessible at http://127.0.0.1:8000/epic-event-crm-admin/
@@ -18,8 +21,10 @@ Our API allows users to make CRUD operations if permissions are respected. Permi
 Our API is organized around [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer). It uses standard HTTP response codes, authentication, and verbs.
 
 we have built this API respecting the recommendations of the OWASP top [10 recommandations](https://owasp.org/www-project-top-ten/)
+<hr>
+<br>
 
-##  📖  API Documentation
+## <p align=center>  📖  API Documentation </p>
 
 [API documentation](https://documenter.getpostman.com/view/19779552/Uz59Me61)
 
@@ -29,13 +34,19 @@ Once server is running, API specifications are accessible on those urls with dif
 *   ReDoc view: [http://127.0.0.1:8000/api/schema/redoc/](http://127.0.0.1:8000/api/schema/redoc/)
 *   YAML schema: [http://127.0.0.1:8000/api/schema/](http://127.0.0.1:8000/api/schema/)
 
-## :mag: Technologies
+<hr>
+<br>
+
+## <p align=center> :mag: Technologies </p>
 
 *   Django Rest Framework as backend
 *   Postgresql as database
 *   JWT (JSON Web Token) for the backend authentication
 
-## 💿 How to setup the API ?
+<hr>
+<br>
+
+## <p align=center> 💿 How to setup the API ? </p>
 
 **1. First, you will need to download [the source code](https://github.com/SaiedZ/OC-P12-EPIC-EVENT.git) from GitHub.**
 
@@ -88,7 +99,10 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-## :sunglasses: Create a superuser (administrator)
+<hr>
+<br>
+
+## <p align=center> :sunglasses: Create a superuser (administrator) </p>
 
 Open a terminal and navigate into the root of the project (i.e. the folder where is situated manage.py) , and run the following command:
 ```bash
@@ -100,7 +114,10 @@ The admin page will be accessible at http://127.0.0.1:8000/admin
 
 The admin page for CRM users will be accessible at http://127.0.0.1:8000/epic-event-crm-admin/
 
-## ⚙️ Launch the development server
+<hr>
+<br>
+
+## <p align=center> ⚙️ Launch the development server </p>
 
 First of all, you need to be located in the **src forlder**
 
@@ -115,14 +132,20 @@ Once the development server is launched, you can start using the API by followin
 
 API will be accessible (with Postman for example) at http://127.0.0.1:8000 .
 
-## :detective: Logging
+<hr>
+<br>
+
+## <p align=center> :detective: Logging </p>
 
 Logs are registered in two files at the root of the project in a folder named ` logs `:
 
 * debug.log, which shows all messages, but only activated if DEBUG is set to True in CRM/settings.py
 * warning.log which shows messages from WARNING level and above. It is always active.
 
-## :dart: Tests
+<hr>
+<br>
+
+## <p align=center> :dart: Tests </p>
 
 You can run test with this commands ` pytest ` or ` python manage.py test `. 
 
