@@ -33,3 +33,13 @@
 2022-05-30 20:17:39,596 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
 2022-05-30 20:18:49,821 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
 2022-05-30 20:18:59,942 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-06-04 12:22:43,832 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/events/ using  request.method='GET'
+2022-06-04 12:22:47,342 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-06-04 12:24:39,099 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/events/ using  request.method='GET'
+2022-06-04 12:24:43,116 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-06-04 12:24:55,932 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/events/ using  request.method='GET'
+2022-06-04 12:24:59,373 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-06-04 12:25:37,342 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/events/ using  request.method='GET'
+2022-06-04 12:25:40,583 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
+2022-06-04 12:26:14,129 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/events/ using  request.method='GET'
+2022-06-04 12:26:17,214 WARNING permissions Unauthorized user ` AnonymousUser ` tried to access /api/users/
