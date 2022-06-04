@@ -122,7 +122,7 @@ Logs are registered in two files at the root of the project in a folder named ` 
 * debug.log, which shows all messages, but only activated if DEBUG is set to True in CRM/settings.py
 * warning.log which shows messages from WARNING level and above. It is always active.
 
-## :detective: Tests
+## :dart: Tests
 
 You can run test with this commands ` pytest ` or ` python manage.py test `. 
 
