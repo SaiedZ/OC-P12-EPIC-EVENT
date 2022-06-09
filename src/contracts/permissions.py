@@ -1,4 +1,8 @@
+import logging
+
 from rest_framework.permissions import BasePermission
+
+logger = logging.getLogger('custom_logger')
 
 
 class ContractPermissionSafeAndPost(BasePermission):
@@ -22,7 +26,13 @@ class ContractPermissionSafeAndPost(BasePermission):
     def has_object_permission(self, request, view, obj):
         if view.action == "retrieve":
             return True
-        return request.user == obj.sales_contact
+        if request.user == obj.sales_contact:
+            return True
+        else:
+            logger.warning(f"Unauthorized user ` {request.user} ` "
+                f"tried to access {request.path} "
+                f"using  {request.method=}")
+            return False
 
 
 class SignedContractTReadOnly(BasePermission):
